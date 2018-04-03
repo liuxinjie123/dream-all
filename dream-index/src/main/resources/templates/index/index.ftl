@@ -15,7 +15,7 @@
 <h1>Home Page</h1>
 <span class="model1"><a href="/">首页</a></span>
 <span class="model1"><a href="http://www.dream.com:8081">网上商城</a></span>
-<span class="model1"><a heff="/tender">采购</a></span>
+<span class="model1"><a href="/tender">采购</a></span>
 <span class="model1"><a href="/finance">金融</a></span>
 <span class="model1"><a href="/news">资讯</a></span>
 </body>
