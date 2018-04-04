@@ -1,4 +1,4 @@
-package com.dream.dreamtender;
+package com.dream.member;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class DreamTenderApplicationTests {
+public class MemberApplicationTests {
 
 	@Test
 	public void contextLoads() {
