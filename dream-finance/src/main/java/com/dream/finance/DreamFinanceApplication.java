@@ -1,12 +1,12 @@
-package com.dream.dreamnews;
+package com.dream.finance;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DreamNewsApplication {
+public class DreamFinanceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DreamNewsApplication.class, args);
+		SpringApplication.run(DreamFinanceApplication.class, args);
 	}
 }
