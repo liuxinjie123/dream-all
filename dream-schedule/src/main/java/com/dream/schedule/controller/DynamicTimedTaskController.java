@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,6 +41,12 @@ public class DynamicTimedTaskController {
     private String scheduledPlan1;
     @Value("${timedScheduled2}")
     private String scheduledPlan2;
+    @Value("${timedScheduled3}")
+    private String scheduledPlan3;
+    @Value("${timedScheduled4}")
+    private String scheduledPlan4;
+    @Value("${timedScheduled5}")
+    private String scheduledPlan5;
 
     @Bean
     public ThreadPoolTaskScheduler threadPoolTaskScheduler() {
@@ -62,7 +69,7 @@ public class DynamicTimedTaskController {
          * trigger:定时任务执行的时间
          */
         future = threadPoolTaskScheduler.schedule(new myRunable(), new CronTrigger(scheduledPlan1));
-
+        System.out.println(" START TASK ");
         return "START TASK SUCCESS";
     }
 
@@ -72,9 +79,12 @@ public class DynamicTimedTaskController {
     @RequestMapping("/end")
     public String endTask() {
         if (future != null) {
+            System.out.println(" future IS NOT NULL.");
             future.cancel(true);
+        } else {
+            System.out.println(" future IS NULL.");
         }
-        System.out.println("endTask");
+        System.out.println(" END TASK ");
         return "END TASK SUCCESS";
     }
 
@@ -84,14 +94,26 @@ public class DynamicTimedTaskController {
      * 1,先停止定时器
      * 2,在启动定时器
      */
-    @RequestMapping("/change")
-    public String changeTask() {
+    @RequestMapping("/change/{type}")
+    public String changeTask(@PathVariable("type") String type) {
         //停止定时器
         endTask();
         //定义新的执行时间
-        future = threadPoolTaskScheduler.schedule(new myRunable(), new CronTrigger(scheduledPlan2));
+        if ("1".equals(type)) {
+            future = threadPoolTaskScheduler.schedule(new myRunable(), new CronTrigger(scheduledPlan1));
+        } else if ("2".equals(type)) {
+            future = threadPoolTaskScheduler.schedule(new myRunable(), new CronTrigger(scheduledPlan2));
+        } else if ("3".equals(type)) {
+            future = threadPoolTaskScheduler.schedule(new myRunable(), new CronTrigger(scheduledPlan3));
+        } else if ("4".equals(type)) {
+            future = threadPoolTaskScheduler.schedule(new myRunable(), new CronTrigger(scheduledPlan4));
+        } else if ("5".equals(type)) {
+            future = threadPoolTaskScheduler.schedule(new myRunable(), new CronTrigger(scheduledPlan5));
+        } else {
+            future = threadPoolTaskScheduler.schedule(new myRunable(), new CronTrigger(scheduledPlan1));
+        }
         //启动定时器
-        StartTest();
+        //StartTest();
         System.out.println("CHANGE TASK SUCCESS");
         return "CHANGE TASK SUCCESS";
     }
