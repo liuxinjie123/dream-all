@@ -1,6 +1,5 @@
 package com.dream.member.hession;
 
-import com.dream.member.api.test.HelloService;
 import com.dream.member.api.user.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -8,17 +7,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.remoting.caucho.HessianProxyFactoryBean;
 
 @Configuration
-public class ClientApplication {
+public class UserClientApplication {
     @Value("${hessianServerIP}")
     private String hessianServerIP;
 
     @Bean
-    public HessianProxyFactoryBean helloClient() {
+    public HessianProxyFactoryBean userClient() {
         HessianProxyFactoryBean factory = new HessianProxyFactoryBean();
-        factory.setServiceUrl(hessianServerIP + "HelloService");
-        factory.setServiceInterface(HelloService.class);
+        factory.setServiceUrl(hessianServerIP + "UserService");
+        factory.setServiceInterface(UserService.class);
         return factory;
     }
-
-
 }
