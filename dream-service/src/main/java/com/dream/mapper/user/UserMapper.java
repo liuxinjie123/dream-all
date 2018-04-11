@@ -14,6 +14,9 @@ public interface UserMapper {
     @Options(useGeneratedKeys=true)
     int addUser(UserDAO user);
 
-    @Select(" SELECT * FROM U_USER WHERE USER_ID=#{userId} ")
+    @Select(" SELECT USER_ID AS userId, USERNAME as username, PASSWORD AS password, STATUS as status, " +
+            " NAME as name, MOBILE as mobile, EMAIL as email, CREATE_TIME AS createTime, CREATE_USER_ID AS createUserId, " +
+            " LAST_UPDATE_USER_ID AS lastUpdateUserId, LAST_UPDATE_TIME AS lastUpdateTime " +
+            " FROM U_USER WHERE USER_ID=#{userId} ")
     UserDAO getByUserId(String userId);
 }
