@@ -6,6 +6,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -18,5 +19,4 @@ public class UserDAO implements Serializable {
     private String name;
     private String mobile;
     private String email;
-
 }
