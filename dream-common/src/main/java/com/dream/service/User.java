@@ -1,15 +1,13 @@
-package com.dream.dao.user;
+package com.dream.service;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
 import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
-public class UserDAO implements Serializable {
+public class User implements Serializable {
     private int id;
     private String userId;
     private String username;
@@ -18,5 +16,4 @@ public class UserDAO implements Serializable {
     private String name;
     private String mobile;
     private String email;
-
 }

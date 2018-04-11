@@ -16,6 +16,7 @@ public class ClientApplication {
         HessianProxyFactoryBean factory = new HessianProxyFactoryBean();
         factory.setServiceUrl(hessianServerIP + "HelloService");
         factory.setServiceInterface(HelloService.class);
+        factory.setOverloadEnabled(true);
         return factory;
     }
 

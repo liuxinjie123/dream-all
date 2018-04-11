@@ -5,18 +5,17 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @NoArgsConstructor
-@RequiredArgsConstructor
-public class UserDAO extends BaseDAO {
+public class UserDAO implements Serializable {
     private int id;
     private String userId;
-    @NonNull
     private String username;
     private String password;
     private String status;
     private String name;
-    @NonNull
     private String mobile;
     private String email;
 

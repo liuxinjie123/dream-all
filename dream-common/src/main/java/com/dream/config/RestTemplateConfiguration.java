@@ -17,7 +17,6 @@ import java.util.List;
 
 @Configuration
 public class RestTemplateConfiguration {
-
     private static final Logger logger = LoggerFactory.getLogger(RestTemplateConfiguration.class);
 
     @Autowired
