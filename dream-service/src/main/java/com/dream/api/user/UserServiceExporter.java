@@ -1,5 +1,6 @@
 package com.dream.api.user;
 
+import com.dream.config.hessian.KittHessianServiceExporter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +13,7 @@ public class UserServiceExporter {
 
     @Bean(name = "/UserService")
     public HessianServiceExporter userService() {
-        HessianServiceExporter exporter = new HessianServiceExporter();
+        HessianServiceExporter exporter = new KittHessianServiceExporter();
         exporter.setService(userService);
         exporter.setServiceInterface(UserService.class);
         return exporter;

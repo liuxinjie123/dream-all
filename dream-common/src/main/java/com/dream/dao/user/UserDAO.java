@@ -3,12 +3,10 @@ package com.dream.dao.user;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-
 @Data
 @NoArgsConstructor
-public class UserDAO implements Serializable {
+public class UserDAO extends BaseDAO {
+    private static final long serialVersionUID = 7591686588782668017L;
     private int id;
     private String userId;
     private String username;
@@ -17,5 +15,4 @@ public class UserDAO implements Serializable {
     private String name;
     private String mobile;
     private String email;
-    private LocalDateTime createTime;
 }
