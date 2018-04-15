@@ -1,4 +1,4 @@
-package com.dream.config.hessian;
+package com.dream.common.hessian;
 
 import com.caucho.hessian.client.HessianProxyFactory;
 

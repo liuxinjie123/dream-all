@@ -1,4 +1,4 @@
-package com.dream.config.hessian.deserializer;
+package com.dream.common.hessian.deserializer;
 
 
 import com.caucho.hessian.HessianException;

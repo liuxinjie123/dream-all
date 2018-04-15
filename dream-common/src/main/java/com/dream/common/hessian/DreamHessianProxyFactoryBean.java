@@ -1,6 +1,5 @@
-package com.dream.config;
+package com.dream.common.hessian;
 
-import com.dream.config.hessian.DreamHessianProxyFactory;
 import org.springframework.remoting.caucho.HessianProxyFactoryBean;
 
 public class DreamHessianProxyFactoryBean extends HessianProxyFactoryBean {

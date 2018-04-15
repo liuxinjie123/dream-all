@@ -1,5 +1,6 @@
 package com.dream.api.test;
 
+import com.dream.common.hessian.DreamHessianServiceExporter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +13,7 @@ public class HelloServiceExporter {
 
     @Bean(name = "/HelloService")
     public HessianServiceExporter accountService() {
-        HessianServiceExporter exporter = new HessianServiceExporter();
+        HessianServiceExporter exporter = new DreamHessianServiceExporter();
         exporter.setService(helloService);
         exporter.setServiceInterface(HelloService.class);
         return exporter;

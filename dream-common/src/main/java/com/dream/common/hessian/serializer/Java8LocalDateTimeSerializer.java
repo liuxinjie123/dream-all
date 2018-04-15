@@ -1,4 +1,4 @@
-package com.dream.config.hessian.serializer;
+package com.dream.common.hessian.serializer;
 
 
 import java.time.LocalDateTime;

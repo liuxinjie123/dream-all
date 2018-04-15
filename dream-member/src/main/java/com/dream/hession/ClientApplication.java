@@ -1,7 +1,7 @@
 package com.dream.hession;
 
 import com.dream.api.test.HelloService;
-import com.dream.config.DreamHessianProxyFactoryBean;
+import com.dream.common.hessian.DreamHessianProxyFactoryBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

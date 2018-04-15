@@ -1,10 +1,10 @@
-package com.dream.config.hessian;
+package com.dream.common.hessian;
 
 import com.caucho.hessian.io.*;
-import com.dream.config.hessian.deserializer.Java8LocalDateDeserializer;
-import com.dream.config.hessian.deserializer.Java8LocalDateTimeDeserializer;
-import com.dream.config.hessian.serializer.Java8LocalDateSerializer;
-import com.dream.config.hessian.serializer.Java8LocalDateTimeSerializer;
+import com.dream.common.hessian.deserializer.Java8LocalDateDeserializer;
+import com.dream.common.hessian.deserializer.Java8LocalDateTimeDeserializer;
+import com.dream.common.hessian.serializer.Java8LocalDateSerializer;
+import com.dream.common.hessian.serializer.Java8LocalDateTimeSerializer;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
