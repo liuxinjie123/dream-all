@@ -15,6 +15,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDAO getByUserId(String userId) {
         UserDAO user = userMapper.getByUserId(userId);
+        System.out.println("user=" + user.toString());
         return user == null ? new UserDAO() : user;
     }
 

@@ -13,8 +13,6 @@ public class MvcConfig {
     @Autowired
     protected ObjectMapper objectMapper;
 
-
-
     @PostConstruct
     private void jacksonConfig() {
         objectMapper.registerModule(new Java8TimeModule());

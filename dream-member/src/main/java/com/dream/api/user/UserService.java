@@ -4,7 +4,7 @@ import com.dream.dao.user.UserDAO;
 import org.springframework.cache.annotation.Cacheable;
 
 public interface UserService {
-    @Cacheable(value="users", key="'user_'+#id")
+    @Cacheable(value="users", key="'user_'+#userId")
     UserDAO getByUserId(String userId);
 
     String securePassword(String password);
