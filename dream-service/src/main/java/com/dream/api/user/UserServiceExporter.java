@@ -1,6 +1,6 @@
 package com.dream.api.user;
 
-import com.dream.config.hessian.KittHessianServiceExporter;
+import com.dream.config.KittHessianServiceExporter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

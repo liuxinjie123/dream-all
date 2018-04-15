@@ -4,10 +4,6 @@ package com.dream.config.hessian.serializer;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- *
- *
- */
 public class Java8LocalDateTimeSerializer extends AbstractJava8Serializer {
 
     @Override

@@ -1,6 +1,5 @@
 package com.dream.config.hessian;
 
-
 import com.caucho.hessian.io.*;
 import com.dream.config.hessian.deserializer.Java8LocalDateDeserializer;
 import com.dream.config.hessian.deserializer.Java8LocalDateTimeDeserializer;
@@ -12,10 +11,6 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-/*
-
- */
-@SuppressWarnings("unchecked")
 public class Java8TimeSerializerFactory extends AbstractSerializerFactory {
     private static final Map<Class<?>, Serializer> Serializers = new HashMap<Class<?>, Serializer>();
     private static final Map<Class<?>, Deserializer> Deserializers = new HashMap<Class<?>, Deserializer>();

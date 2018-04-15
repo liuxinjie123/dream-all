@@ -5,12 +5,7 @@ import com.caucho.hessian.io.AbstractSerializer;
 
 import java.io.IOException;
 
-/**
- *
- *
- */
 public abstract class AbstractJava8Serializer extends AbstractSerializer {
-
     @Override
     public void writeObject(Object obj, AbstractHessianOutput out) throws IOException {
         if (obj == null) {
@@ -19,7 +14,6 @@ public abstract class AbstractJava8Serializer extends AbstractSerializer {
             if (out.addRef(obj)) {
                 return;
             }
-
             Class<?> cl = obj.getClass();
 
             int ref = out.writeObjectBegin(cl.getName());

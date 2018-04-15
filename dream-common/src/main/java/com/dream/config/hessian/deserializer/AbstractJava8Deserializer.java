@@ -7,10 +7,6 @@ import com.caucho.hessian.io.AbstractHessianInput;
 
 import java.io.IOException;
 
-/**
- * Deserializes objects in the Joda Time API.
- *
- */
 public abstract class AbstractJava8Deserializer extends AbstractDeserializer {
 
     @Override

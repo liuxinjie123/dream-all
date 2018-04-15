@@ -1,13 +1,11 @@
-package com.dream.config.hessian;
+package com.dream.config;
 
+import com.dream.config.hessian.DreamSerializerFactory;
 import org.springframework.remoting.caucho.HessianServiceExporter;
 
-/**
- * Created by hongpf on 16/4/28.
- */
 public class KittHessianServiceExporter extends HessianServiceExporter {
     public KittHessianServiceExporter(){
         super();
-        this.setSerializerFactory(new KittSerializerFactory());
+        this.setSerializerFactory(new DreamSerializerFactory());
     }
 }

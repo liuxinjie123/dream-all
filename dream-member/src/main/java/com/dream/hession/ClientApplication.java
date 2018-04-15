@@ -1,7 +1,7 @@
 package com.dream.hession;
 
 import com.dream.api.test.HelloService;
-import com.dream.config.hessian.KittHessianProxyFactoryBean;
+import com.dream.config.DreamHessianProxyFactoryBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +14,7 @@ public class ClientApplication {
 
     @Bean
     public HessianProxyFactoryBean helloClient() {
-        HessianProxyFactoryBean factory = new KittHessianProxyFactoryBean();
+        HessianProxyFactoryBean factory = new DreamHessianProxyFactoryBean();
         factory.setServiceUrl(hessianServerIP + "HelloService");
         factory.setServiceInterface(HelloService.class);
         factory.setOverloadEnabled(true);
