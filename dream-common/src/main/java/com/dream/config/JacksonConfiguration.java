@@ -12,9 +12,8 @@ import org.springframework.context.annotation.Configuration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Configuration
+//@Configuration
 public class JacksonConfiguration {
-
     
     @Bean
     public SimpleModule jacksonDateModule() {

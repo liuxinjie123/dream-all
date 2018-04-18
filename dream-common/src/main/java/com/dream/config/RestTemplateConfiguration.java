@@ -15,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Configuration
+//@Configuration
 public class RestTemplateConfiguration {
     private static final Logger logger = LoggerFactory.getLogger(RestTemplateConfiguration.class);
 

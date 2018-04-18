@@ -13,10 +13,13 @@
 </head>
 <body>
 <h1>Home Page</h1>
-<span class="model1"><a href="/">首页</a></span>
-<span class="model1"><a href="http://www.dream.com:8081">网上商城</a></span>
-<span class="model1"><a href="http://www.dream.com:8085">金融</a></span>
-<span class="model1"><a href="http://www.dream.com:8083">资讯</a></span>
+<p>
+    <span class="model1"><a href="/">首页</a></span>
+    <span class="model1"><a href="http://www.dream.com:8001">网上商城</a></span>
+    <span class="model1"><a href="http://www.dream.com:8005">金融</a></span>
+    <span class="model1"><a href="http://www.dream.com:8003">资讯</a></span>
+</p>
+
 </body>
 
 </html>
