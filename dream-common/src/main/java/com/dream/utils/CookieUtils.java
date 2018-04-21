@@ -116,7 +116,7 @@ public final class CookieUtils {
     private static final void doSetCookie(HttpServletRequest request, HttpServletResponse response,
             String cookieName, String cookieValue, int cookieMaxage, boolean isEncode) {
         try {
-            cookieValue = isEncode? URLEncoder.encode(cookieValue, "utf-8"): null == cookieValue? "" : cookieValue;
+            cookieValue = isEncode ? URLEncoder.encode(cookieValue, "utf-8") : null == cookieValue? "" : cookieValue;
             Cookie cookie = new Cookie(cookieName, cookieValue);
             if (cookieMaxage > 0) {
             	cookie.setMaxAge(cookieMaxage);
@@ -174,7 +174,7 @@ public final class CookieUtils {
             serverName = serverName.substring(7);
             final int end = serverName.indexOf("/");
             serverName = serverName.substring(0, end);
-            final String[] domains = serverName.split("\\.");
+            final String[] domains = serverName.split(".");
             int len = domains.length;
             if (len > 3) {	// www.xxx.com.cn
                 domainName = "." + domains[len - 3] + "." + domains[len - 2] + "." + domains[len - 1];

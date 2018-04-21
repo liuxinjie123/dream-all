@@ -71,6 +71,9 @@ public class UserServiceImpl implements UserService {
         System.out.println(" ------ enter login method");
         // 判断账号密码是否正确
         UserDAO user = userMapper.getByAccount(account);
+        if (user == null) {
+            return Result.build(Constants.CODE_FAILURE, "账号或密码错误");
+        }
         if (!SecureUtil.decryptPassword(user, password)) {
             return Result.build(Constants.CODE_FAILURE, "账号或密码错误");
         }

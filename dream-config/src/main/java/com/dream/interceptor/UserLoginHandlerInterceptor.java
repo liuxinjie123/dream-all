@@ -6,9 +6,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.dream.api.token.UserTokenService;
 import com.dream.dao.user.UserDAO;
 import com.dream.utils.CookieUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,15 +20,20 @@ public class UserLoginHandlerInterceptor implements HandlerInterceptor {
 
     @Autowired
     private UserTokenService userService;
+    @Value("${loginPageUrl}")
+    private String loginPageUrl;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
+        System.out.println(" cookie name=" + COOKIE_NAME);
         String token = CookieUtils.getCookieValue(request, COOKIE_NAME);
+        System.out.println(" token=" + token);
         UserDAO user = userService.getUserByToken(token);
-        if (StringUtils.isEmpty(token) || null == user) {
+        System.out.println(" user=" + (user == null ? "null" : user.toString()));
+        if (StringUtils.isBlank(token) || null == user) {
 			// 跳转到登录页面，把用户请求的url作为参数传递给登录页面。
-			response.sendRedirect("http://localhost:8002/login?redirect=" + request.getRequestURL());
+			response.sendRedirect(loginPageUrl + "?redirect=" + request.getRequestURL());
 			// 返回false
 			return false;
 		}

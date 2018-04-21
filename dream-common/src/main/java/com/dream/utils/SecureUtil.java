@@ -29,6 +29,7 @@ public class SecureUtil {
 	}
 	
 	public static boolean decryptPassword(UserDAO user, String plainPassword) {
+		if (user == null) return false;
 		String temPassword = user.getSalt() + plainPassword;
 		String md5Password = DigestUtils.md5DigestAsHex(temPassword.getBytes());
 		return user.getPassword().equals(md5Password);

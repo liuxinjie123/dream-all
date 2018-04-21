@@ -15,5 +15,6 @@ public class UserLoginObject implements Serializable {
     private String account;
     @NotBlank(message = "password 不能为空")
     private String password;
+    private String redirect;
 
 }

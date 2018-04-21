@@ -1,6 +1,38 @@
-<html>
+<html xmlns:th="http://www.thymeleaf.org" >
 <head>
+    <meta charset="UTF-8" />
     <title>LOGIN</title>
+    <link rel="shortcut icon" th:href="@{/images/favicon.jpg}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/styles/login.css}">
+    <link rel="stylesheet" th:href="@{/styles/common.css}">
+    <script type="text/javascript" th:src="@{/scripts/jquery-1.10.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/scripts/login.js}"></script>
 </head>
-<H1>LOGIN</H1>
+<body>
+<div id="loginDiv">
+    <p class="mainTitle" th:text="登录"></p>
+    <form id="loginForm" onsubmit="return false;" method="post">
+        <p>
+            <label>登录名</label>
+            <input type="text" id="account" name="account"/>
+        </p>
+        <p>
+            <label>密码</label>
+            <input type="password" id="password" name="password"/>
+        </p>
+        <p>
+            <input type="hidden"  id="redirect" th:value="${redirect}" name="redirect">
+        </p>
+        <p>
+            <span id="loginError" name="loginError"  th:value="${loginError}" class="errorMsg"></span>
+        </p>
+        <p>
+            <input id="login-button" type="button" value="SUBMIT"/>
+        </p>
+    </form>
+</div>
+
+
+</body>
+
 </html>

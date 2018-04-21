@@ -1,11 +1,10 @@
 package com.dream.dao.user;
 
-import com.dream.utils.SecureUtil;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDAO extends BaseDAO {
     private static final long serialVersionUID = 7591686588782668017L;
     private Long id;						// 自增长主键
@@ -19,5 +18,7 @@ public class UserDAO extends BaseDAO {
     private String mobile;					// 手机号
     private String email;					// 邮箱
 
-
+    public UserDAO() {
+        super();
+    }
 }

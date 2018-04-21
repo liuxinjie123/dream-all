@@ -1,0 +1,9 @@
+.mainTitle {
+    font-size: 30px;
+}
+
+#loginDiv {
+    background: wheat;
+    border: 1px solid green;
+    font-size: 25px;
+}

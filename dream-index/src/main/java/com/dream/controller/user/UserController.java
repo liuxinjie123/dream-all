@@ -4,14 +4,12 @@ import com.dream.dto.user.UserVO;
 import com.dream.vo.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 @RequestMapping("/user")
-@RestController("user.UserController")
+@Controller
 public class UserController {
     @Value("${dreamServiceAddress}")
     private String serviceAddress;
@@ -19,6 +17,7 @@ public class UserController {
     private RestTemplate restTemplate;
 
     @GetMapping("/{userId}")
+    @ResponseBody
     public Result getByUserId(@PathVariable("userId") String userId) {
         String url = serviceAddress + "/api/rest/user/" + userId;
         UserVO user = restTemplate.postForObject(url, null, UserVO.class);
@@ -27,4 +26,10 @@ public class UserController {
         System.out.println(user.getLastUpdateTime());
         return Result.success().setData(user);
     }
+
+    @PostMapping("/add")
+    public String userPage() {
+        return "user/user";
+    }
+
 }

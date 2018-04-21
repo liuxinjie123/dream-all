@@ -12,6 +12,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @GetMapping
+    public String userPage() {
+        return "user";
+    }
+
     @GetMapping("/{userId}")
     public UserDAO getByUserId(@PathVariable("userId") String userId) {
         System.out.println(" ------ enter get user by userId method");

@@ -27,11 +27,14 @@ public class UserTokenServiceImpl implements UserTokenService {
         try {
             // 调用sso系统的服务，根据token取用户信息
             String json = HttpClientUtil.doGet(SSO_BASE_URL + SSO_USER_TOKEN + token);
-            System.out.println("json : " + json);
+            System.out.println(" json : " + json);
             // 把json转换成 Result
             Result result = Result.formatToPojo(json, UserDAO.class);
-            if (null != result && Constants.CODE_200.equals(result.getCode())) {
+            System.out.println(" result : " + result);
+            System.out.println(" result.code = " + result.getCode());
+            if (null != result && Constants.CODE_SUCCESS.equals(result.getCode())) {
                 UserDAO user = (UserDAO) result.getData();
+                System.out.println(" user = " + user.toString());
                 return user;
             }
 

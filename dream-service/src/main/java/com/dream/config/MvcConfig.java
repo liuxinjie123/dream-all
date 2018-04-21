@@ -2,6 +2,7 @@ package com.dream.config;
 
 import com.dream.ext.jackson.Java8TimeModule;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -16,8 +17,12 @@ public class MvcConfig {
 
     @PostConstruct
     private void jacksonConfig() {
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         objectMapper.registerModule(new Java8TimeModule());
     }
+
+
+
 
 
 }

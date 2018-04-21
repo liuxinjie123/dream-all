@@ -92,7 +92,7 @@ public class Result<T> implements Serializable {
                     obj = MAPPER.readValue(data.asText(), clazz);
                 }
             }
-            return build(String.valueOf(jsonNode.get("status")), jsonNode.get("msg").asText(), obj);
+            return build(jsonNode.get("code").asText(), jsonNode.get("msg").asText(), obj);
         } catch (Exception e) {
             return null;
         }
