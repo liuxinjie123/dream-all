@@ -1,6 +1,6 @@
 package com.dream.controller.user;
 
-import com.dream.dto.user.UserVO;
+import com.dream.dao.user.UserDAO;
 import com.dream.vo.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,7 +20,7 @@ public class UserController {
     @ResponseBody
     public Result getByUserId(@PathVariable("userId") String userId) {
         String url = serviceAddress + "/api/rest/user/" + userId;
-        UserVO user = restTemplate.postForObject(url, null, UserVO.class);
+        UserDAO user = restTemplate.postForObject(url, null, UserDAO.class);
         System.out.println("user=" + user.toString());
         System.out.println(user.getCreateTime());
         System.out.println(user.getLastUpdateTime());

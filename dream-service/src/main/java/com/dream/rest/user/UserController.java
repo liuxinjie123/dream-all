@@ -11,7 +11,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/{userId}")
+    @RequestMapping(value = "/{userId}", method = {RequestMethod.GET, RequestMethod.POST})
     public UserDAO getByUserId(@PathVariable("userId") String userId) {
         return userService.getByUserId(userId);
     }

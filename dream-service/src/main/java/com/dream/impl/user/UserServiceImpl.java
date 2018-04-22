@@ -24,7 +24,6 @@ import java.util.UUID;
 @Transactional
 @PropertySource(value = "classpath:redis.properties")
 public class UserServiceImpl implements UserService {
-
     @Autowired
     private JedisClient jedisClient;
     @Value("${REDIS_USER_SESSION_KEY}")
@@ -86,13 +85,13 @@ public class UserServiceImpl implements UserService {
         user.setSalt(null);
         // 把用户信息写入 redis
         jedisClient.set(REDIS_USER_SESSION_KEY + ":" + token, JsonUtils.objectToJson(user));
-        // user 已经是持久化对象了，被保存在了session缓存当中，若user又重新修改了属性值，那么在提交事务时，此时 hibernate对象就会拿当前这个user对象和保存在session缓存中的user对象进行比较，如果两个对象相同，则不会发送update语句，否则，如果两个对象不同，则会发出update语句。
+        // user 已经是持久化对象了，被保存在了session缓存当中，若user又重新修改了属性值，那么在提交事务时，
+        // 此时 hibernate对象就会拿当前这个user对象和保存在session缓存中的user对象进行比较，如果两个对象相同，则不会发送update语句，
+        // 否则，如果两个对象不同，则会发出update语句。
         user.setPassword(userPassword);
         user.setSalt(userSalt);
         // 设置 session 的过期时间
         jedisClient.expire(REDIS_USER_SESSION_KEY + ":" + token, SSO_SESSION_EXPIRE);
-        // 添加写 cookie 的逻辑，cookie 的有效期是关闭浏览器就失效。
-
         // 返回token
         return Result.success().setData(token);
     }

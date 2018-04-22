@@ -1,11 +1,15 @@
 package com.dream.controller.user;
 
+import com.dream.annotation.Client;
+import com.dream.api.redis.JedisClient;
 import com.dream.api.user.UserService;
 import com.dream.dao.user.UserDAO;
+import com.dream.dto.ClientInfo;
 import com.dream.utils.CookieUtils;
+import com.dream.utils.JsonUtils;
+import com.dream.utils.SecureUtil;
 import com.dream.vo.Constants;
 import com.dream.vo.Result;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -19,9 +23,19 @@ import java.util.Map;
 @Controller
 public class UserLoginController {
     @Autowired
+    private JedisClient jedisClient;
+    @Autowired
     private UserService userService;
     @Value("${indexPage}")
     private String indexPage;
+    @Value("${USER_TOKEN_NAME_KEY}")
+    private String USER_TOKEN_NAME;
+    @Value("${REDIS_USER_SESSION_KEY}")
+    private String REDIS_USER_SESSION_KEY;
+    @Value("${REDIS_USER_SESSION_INFO_KEY}")
+    private String REDIS_USER_SESSION_INFO_KEY;
+    @Value("${SSO_SESSION_EXPIRE}")
+    private Integer SSO_SESSION_EXPIRE;
 
     @GetMapping("/login")
     public String loginPage(@RequestParam(value = "redirect", required = false, defaultValue = "") String redirect,
@@ -33,7 +47,8 @@ public class UserLoginController {
 
     @PostMapping(value="/login/submit")
     @ResponseBody
-    public Result userLogin(@RequestParam("account") String account,
+    public Result userLogin(@Client ClientInfo clientInfo,
+                            @RequestParam("account") String account,
                             @RequestParam("password") String password,
                             @RequestParam(value = "redirect", required = false, defaultValue = "") String redirect,
                             HttpServletRequest request, HttpServletResponse response) {
@@ -43,7 +58,15 @@ public class UserLoginController {
             Result<Object> result = userService.login(account, password);
             if (!Constants.CODE_SUCCESS.equals(result.getCode())) return result;
             String token = (String) result.getData();
-            CookieUtils.setCookie(request, response, "USER_TOKEN", token);
+            // 将客户信息写入 redis
+            String ip = clientInfo.getIP();
+            String userAgent = clientInfo.getUserAgent();
+            String acceptLanguage = clientInfo.getAcceptLanguage();
+            String clientInfoMsg = ip + userAgent + acceptLanguage;
+            System.out.println(" clientInfoMsg = " + clientInfoMsg);
+            jedisClient.set(REDIS_USER_SESSION_INFO_KEY + ":" + token, SecureUtil.securePassword(clientInfoMsg));
+            // 添加写 cookie 的逻辑，cookie 的有效期是关闭浏览器就失效。
+            CookieUtils.setCookie(request, response, USER_TOKEN_NAME, token);
             Map<String, String> map = new HashMap<>();
             map.put("indexPage", indexPage);
             map.put("redirectPage", redirect);

@@ -1,23 +1,28 @@
 package com.dream.config;
 
 import com.dream.ext.jackson.Java8TimeModule;
+import com.dream.interceptor.ClientInfoMethodArgumentHandler;
 import com.dream.interceptor.UserLoginHandlerInterceptor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.*;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 @Configuration
-@ComponentScan({"com.dream"})
+@ComponentScan("com.dream")
 public class MvcConfig implements WebMvcConfigurer {
     @Autowired
     protected ObjectMapper objectMapper;
     @Autowired
     UserLoginHandlerInterceptor userLoginHandlerInterceptor;
+    @Autowired
+    ClientInfoMethodArgumentHandler clientInfoMethodArgumentHandler;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -25,13 +30,11 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(userLoginHandlerInterceptor).addPathPatterns("/user/**", "/api/**", "/mall/**");
     }
 
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("/bower_components/**").addResourceLocations("file:./src-web/bower_components/");
-//        registry.addResourceHandler("/styles/**").addResourceLocations("file:./src-web/app/styles/");
-//        registry.addResourceHandler("/images/**").addResourceLocations("file:./src-web/app/images/");
-//        registry.addResourceHandler("/scripts/**").addResourceLocations("file:./src-web/app/scripts/");
-//        registry.addResourceHandler("/files/**").addResourceLocations("file:./files/");
-//    }
+
+    //添加自定义方法参数解析器
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        argumentResolvers.add(clientInfoMethodArgumentHandler);                                         //获取客户端信息
+    }
 
     @PostConstruct
     private void jacksonConfig() {
