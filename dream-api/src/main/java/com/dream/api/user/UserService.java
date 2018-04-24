@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public interface UserService {
-
     UserDAO getByUserId(String userId);
 
     UserDAO getByAccount(String account);
