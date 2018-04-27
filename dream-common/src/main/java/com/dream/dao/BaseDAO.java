@@ -1,4 +1,4 @@
-package com.dream.dao.user;
+package com.dream.dao;
 
 import com.dream.ext.jackson.LocalDateTimeDeserializer;
 import com.dream.ext.jackson.LocalDateTimeSerializer;
@@ -6,6 +6,7 @@ import com.dream.vo.Constants;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -29,4 +30,9 @@ public class BaseDAO implements Serializable {
     private String lastUpdateUserId;
 
     public BaseDAO() {}
+
+    public BaseDAO(String createUserId, String lastUpdateUserId) {
+        this.createUserId = createUserId;
+        this.lastUpdateUserId = lastUpdateUserId;
+    }
 }

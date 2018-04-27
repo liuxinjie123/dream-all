@@ -1,6 +1,6 @@
 package com.dream.vo.user;
 
-import com.dream.dao.user.BaseDAO;
+import com.dream.dao.BaseDAO;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;

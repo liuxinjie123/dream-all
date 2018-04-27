@@ -1,10 +1,10 @@
 package com.dream.impl.user;
 
 import com.dream.api.user.UserService;
+import com.dream.dto.Session;
 import com.dream.mapper.user.UserMapper;
 import com.dream.dao.user.UserDAO;
 import com.dream.api.redis.JedisClient;
-import com.dream.utils.CookieUtils;
 import com.dream.utils.JsonUtils;
 import com.dream.utils.SecureUtil;
 import com.dream.vo.Constants;
@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @Service("user.UserService")
@@ -32,6 +32,8 @@ public class UserServiceImpl implements UserService {
     private Integer SSO_SESSION_EXPIRE;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private Session session;
 
     @Override
     public UserDAO getByUserId(String userId) {
@@ -93,7 +95,11 @@ public class UserServiceImpl implements UserService {
         // 设置 session 的过期时间
         jedisClient.expire(REDIS_USER_SESSION_KEY + ":" + token, SSO_SESSION_EXPIRE);
         // 返回token
-        return Result.success().setData(token);
+        session.login(user);
+        Map<String, String> resultMap = new HashMap<>();
+        resultMap.put("token", token);
+        resultMap.put("userId", user.getUserId());
+        return Result.success().setData(resultMap);
     }
 
     @Override

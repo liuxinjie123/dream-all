@@ -2,7 +2,6 @@ package com.dream.controller.user;
 
 import com.dream.api.user.UserService;
 import com.dream.dao.user.UserDAO;
-import com.dream.vo.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

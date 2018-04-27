@@ -22,4 +22,6 @@ public class Constants {
 
 
     public static final String USER_STATUS_01 = "01";
+
+    public static final String DUBBO_VERSION = "1.0.0";
 }

@@ -1,4 +1,4 @@
-package com.dream.config;
+package com.dream.dto;
 
 
 import com.dream.dao.user.UserDAO;

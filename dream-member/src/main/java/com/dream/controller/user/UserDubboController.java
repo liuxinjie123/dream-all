@@ -1,17 +1,18 @@
 package com.dream.controller.user;
 
-import com.dream.service.user.UserDubboService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.dream.api.dubbo.UserDubboTestService;
+import com.dream.vo.Constants;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class UserDubboController {
-    @Autowired
-    private UserDubboService userDubboService;
+    @Reference(version = Constants.DUBBO_VERSION)
+    private UserDubboTestService userDubboTestService;
 
     @GetMapping("/user/dubbo/hello")
     public String userDubboHello() {
-        return userDubboService.helloDubllo();
+        return userDubboTestService.helloDubbo();
     }
 }

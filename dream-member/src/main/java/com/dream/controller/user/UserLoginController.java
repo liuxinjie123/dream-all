@@ -1,12 +1,15 @@
 package com.dream.controller.user;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.dream.annotation.Client;
 import com.dream.api.redis.JedisClient;
+import com.dream.api.user.UserLoginRecordService;
 import com.dream.api.user.UserService;
 import com.dream.dao.user.UserDAO;
+import com.dream.dao.user.UserLoginRecordDAO;
 import com.dream.dto.ClientInfo;
+import com.dream.threadService.LoginRecordThread;
 import com.dream.utils.CookieUtils;
-import com.dream.utils.JsonUtils;
 import com.dream.utils.SecureUtil;
 import com.dream.vo.Constants;
 import com.dream.vo.Result;
@@ -19,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
 
 @Controller
 public class UserLoginController {
@@ -36,6 +40,10 @@ public class UserLoginController {
     private String REDIS_USER_SESSION_INFO_KEY;
     @Value("${SSO_SESSION_EXPIRE}")
     private Integer SSO_SESSION_EXPIRE;
+    @Autowired
+    private ExecutorService executorService;
+    @Reference(version = Constants.DUBBO_VERSION)
+    private UserLoginRecordService recordService;
 
     @GetMapping("/login")
     public String loginPage(@RequestParam(value = "redirect", required = false, defaultValue = "") String redirect,
@@ -57,7 +65,9 @@ public class UserLoginController {
         try {
             Result<Object> result = userService.login(account, password);
             if (!Constants.CODE_SUCCESS.equals(result.getCode())) return result;
-            String token = (String) result.getData();
+            Map<String, String> resultMap = (Map<String, String>) result.getData();
+            String token = resultMap.get("token");
+            String userId = resultMap.get("userId");
             // 将客户信息写入 redis
             String ip = clientInfo.getIP();
             String userAgent = clientInfo.getUserAgent();
@@ -73,6 +83,9 @@ public class UserLoginController {
             System.out.println(" login, redirect=" + redirect);
             System.out.println(" result=" + result.toString());
             result.setData(map);
+            UserLoginRecordDAO loginRecord = new UserLoginRecordDAO(userId, account, ip, userAgent, acceptLanguage, userId, userId);
+            LoginRecordThread thread = new LoginRecordThread(loginRecord, recordService);
+            executorService.execute(thread);
             return result;
         } catch (Exception e) {
             e.printStackTrace();

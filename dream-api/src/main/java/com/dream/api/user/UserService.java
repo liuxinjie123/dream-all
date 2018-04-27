@@ -3,9 +3,6 @@ package com.dream.api.user;
 import com.dream.dao.user.UserDAO;
 import com.dream.vo.Result;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 public interface UserService {
     UserDAO getByUserId(String userId);
 
