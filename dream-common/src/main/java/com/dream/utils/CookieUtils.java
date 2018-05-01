@@ -39,7 +39,7 @@ public final class CookieUtils {
                     .filter(cookie -> cookieName.equals(cookie.getName()))
                     .findFirst()
                     .map(Cookie::getValue)
-                    .get();
+                    .orElse("");
             if (isDecoder) {
                 retValue = URLDecoder.decode(retValue, "UTF-8");
             }
