@@ -7,6 +7,7 @@ import com.dream.dao.log.ControllerMethodDao;
 import com.dream.dao.user.UserDAO;
 import com.dream.dto.Session;
 import com.dream.threadService.ActionThread;
+import com.dream.vo.Constants;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -26,7 +27,7 @@ public class ActionAspect {
     private Session session;
     @Autowired
     private ExecutorService executorService;
-    @Reference(version = "1.0.0")
+    @Reference(version = Constants.DUBBO_VERSION)
     private ControllerMethodService methodService;
 
     @Pointcut("@annotation(com.dream.annotation.Action)")
@@ -41,7 +42,7 @@ public class ActionAspect {
     }
 
     @Before("execution(* com.dream.controller.*.*.*(..))")
-    public void siteBefore(JoinPoint joinPoint) {
+    public void before(JoinPoint joinPoint) {
         MethodSignature methodSignature = (MethodSignature)joinPoint.getSignature();
         Method method = methodSignature.getMethod();
         UserDAO user = session.getUser();

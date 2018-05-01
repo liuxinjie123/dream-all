@@ -83,6 +83,7 @@ public class UserLoginController {
             System.out.println(" login, redirect=" + redirect);
             System.out.println(" result=" + result.toString());
             result.setData(map);
+            // 记录登录日志
             UserLoginRecordDAO loginRecord = new UserLoginRecordDAO(userId, account, ip, userAgent, acceptLanguage, userId, userId);
             LoginRecordThread thread = new LoginRecordThread(loginRecord, recordService);
             executorService.execute(thread);

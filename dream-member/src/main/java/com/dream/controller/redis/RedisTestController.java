@@ -11,7 +11,7 @@ public class RedisTestController {
     private StringRedisTemplate template;
 
     @RequestMapping("/setValue")
-    public String setValue(){
+    public String setValue() {
         if(!template.hasKey("shabao")){
             template.opsForValue().append("shabao", "我是傻宝");
             return "使用redis缓存保存数据成功";
@@ -22,8 +22,7 @@ public class RedisTestController {
     }
 
     @RequestMapping("/getValue")
-    public String getValue(){
-
+    public String getValue() {
         if(!template.hasKey("shabao")){
             return "key不存在，请先保存数据";
         }else{

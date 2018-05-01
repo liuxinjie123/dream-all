@@ -3,6 +3,7 @@ package com.dream.utils;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.Arrays;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -27,11 +28,14 @@ public final class CookieUtils {
         }
         String retValue = null;
         try {
-            for (int i = 0; i < cookieList.length; i++) {
-                if (cookieList[i].getName().equals(cookieName)) {
-                    retValue = isDecoder? URLDecoder.decode(cookieList[i].getValue(), "UTF-8"):cookieList[i].getValue();
-                    break;
-                }
+            retValue = Arrays.asList(cookieList)
+                    .parallelStream()
+                    .filter(cookie -> cookie.getName().equals(cookieName))
+                    .limit(1)
+                    .map(Cookie::getValue)
+                    .toString();
+            if (isDecoder) {
+                retValue = URLDecoder.decode(retValue, "UTF-8");
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

@@ -21,4 +21,8 @@ public class UserDAO extends BaseDAO {
     private String mobile;					// 手机号
     private String email;					// 邮箱
 
+    public UserDAO(String username) {
+        this.username = username;
+    }
+
 }

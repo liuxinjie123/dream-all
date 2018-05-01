@@ -22,22 +22,16 @@ import org.springframework.context.annotation.Scope;
 @Configuration
 @PropertySource(value = "classpath:httpclient.properties", ignoreResourceNotFound=true)
 public class HttpclientSpringConfig {
-
     @Value("${http.maxTotal}")
     private Integer httpMaxTotal;
-
     @Value("${http.defaultMaxPerRoute}")
     private Integer httpDefaultMaxPerRoute;
-
     @Value("${http.connectTimeout}")
     private Integer httpConnectTimeout;
-
     @Value("${http.connectionRequestTimeout}")
     private Integer httpConnectionRequestTimeout;
-
     @Value("${http.socketTimeout}")
     private Integer httpSocketTimeout;
-
     @Autowired
     private PoolingHttpClientConnectionManager manager;
 

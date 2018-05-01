@@ -17,7 +17,7 @@ public class PageController {
 	}
 
 
-	@GetMapping("/{page}")
+	@GetMapping("/p/{page}")
 	public String showPage(@PathVariable("page") String page) {
 		return page;
 	}

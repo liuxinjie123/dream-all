@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserDubboTestController {
     @Reference(version = Constants.DUBBO_VERSION)
-    UserDubboTestService userDubboTestService;
+    private UserDubboTestService userDubboTestService;
 
     @GetMapping("/user/dubbo/test")
     public String helloDubbo() {

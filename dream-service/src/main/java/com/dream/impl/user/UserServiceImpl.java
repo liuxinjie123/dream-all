@@ -49,7 +49,6 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-
     @Override
     @Transactional
     public Result addUser(UserDAO user) {
