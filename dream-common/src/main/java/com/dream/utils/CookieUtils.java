@@ -28,12 +28,18 @@ public final class CookieUtils {
         }
         String retValue = null;
         try {
+//            for (int i = 0; i < cookieList.length; i++) {
+//                if (cookieList[i].getName().equals(cookieName)) {
+//                    retValue = isDecoder ? URLDecoder.decode(cookieList[i].getValue(), "UTF-8"):cookieList[i].getValue();
+//                    break;
+//                }
+//            }
             retValue = Arrays.asList(cookieList)
                     .parallelStream()
-                    .filter(cookie -> cookie.getName().equals(cookieName))
-                    .limit(1)
+                    .filter(cookie -> cookieName.equals(cookie.getName()))
+                    .findFirst()
                     .map(Cookie::getValue)
-                    .toString();
+                    .get();
             if (isDecoder) {
                 retValue = URLDecoder.decode(retValue, "UTF-8");
             }
