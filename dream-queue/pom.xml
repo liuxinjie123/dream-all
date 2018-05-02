@@ -26,6 +26,12 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>com.dream</groupId>
+			<artifactId>dream-common</artifactId>
+			<version>1.0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-activemq</artifactId>
 		</dependency>
@@ -41,11 +47,11 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!--<dependency>-->
-			<!--<groupId>org.apache.activemq</groupId>-->
-			<!--<artifactId>activemq-pool</artifactId>-->
-			<!--<version>5.15.2</version>-->
-		<!--</dependency>-->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-pool</artifactId>
+			<version>5.14.5</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

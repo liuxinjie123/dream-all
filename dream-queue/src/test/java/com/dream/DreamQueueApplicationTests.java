@@ -1,4 +1,4 @@
-package com.dream.queue;
+package com.dream;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
