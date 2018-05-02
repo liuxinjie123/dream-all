@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.session.web.http.CookieHttpSessionStrategy;
 import org.springframework.session.web.http.HttpSessionStrategy;
 
-@Configuration
+//@Configuration
 public class HttpSessionConfig {
     @Bean
     public HttpSessionStrategy httpSessionStrategy() {
