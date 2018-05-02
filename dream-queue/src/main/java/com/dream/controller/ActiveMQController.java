@@ -1,6 +1,6 @@
 package com.dream.controller;
 
-import com.dream.service.Producer;
+import com.dream.service.MqProducer;
 import com.dream.vo.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,18 +15,18 @@ import javax.jms.Topic;
 @RestController
 public class ActiveMQController {
     @Autowired
-    Producer producer;
+    MqProducer mqProducer;
     @Autowired
     private Topic topic;
     @Autowired
     private Queue queue;
 
 
-    @GetMapping("/test/{name}")
+    @GetMapping("/log/{name}")
     public Result activeMQTest001(@PathVariable("name") String name) {
         for(int i=0; i<100; i++){
-            producer.sendMessage(queue, "My Name is " + name + " !!!  " + i);
-            producer.sendMessage(topic, "My Name is " + name + " !!!  " + i);
+            mqProducer.sendMessage(queue, "My Name is " + name + " !!!  " + i);
+            mqProducer.sendMessage(topic, "My Name is " + name + " !!!  " + i);
         }
         System.out.println(" ------------------------- end --------------------------- ");
         return Result.success();

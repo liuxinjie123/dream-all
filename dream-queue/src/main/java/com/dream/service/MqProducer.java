@@ -10,13 +10,13 @@ import javax.jms.Destination;
 
 
 @Service("producer")
-public class Producer {
+public class MqProducer {
     @Autowired
     private JmsMessagingTemplate jmsMessagingTemplate;
     // 也可以注入JmsTemplate，JmsMessagingTemplate对JmsTemplate进行了封装
 
     // 发送消息，destination是发送到的队列，message是待发送的消息
-    public void sendMessage(Destination destination, final String message){
+    public void sendMessage(Destination destination, final Object message){
         jmsMessagingTemplate.convertAndSend(destination, message);
     }
 

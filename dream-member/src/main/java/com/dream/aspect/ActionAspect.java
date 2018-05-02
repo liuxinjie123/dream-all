@@ -30,6 +30,7 @@ public class ActionAspect {
     @Reference(version = Constants.DUBBO_VERSION)
     private ControllerMethodService methodService;
 
+
     @Pointcut("@annotation(com.dream.annotation.Action)")
     public void annotationPointCut() {}
 
