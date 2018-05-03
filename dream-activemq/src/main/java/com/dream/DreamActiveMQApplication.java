@@ -4,9 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DreamRabbitQueueApplication {
-
+public class DreamActiveMQApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(DreamRabbitQueueApplication.class, args);
+		SpringApplication.run(DreamActiveMQApplication.class, args);
 	}
 }

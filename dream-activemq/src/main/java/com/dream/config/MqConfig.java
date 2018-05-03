@@ -18,12 +18,12 @@ public class MqConfig {
     public final static String QUEUE_NAME = "spring.boot.queue.test";
     public final static String QUEUE_NAME_2 = "spring.boot.queue.test.2";
 
-    @Bean("queue1")
+    @Bean
     public Queue queue(){
         return new ActiveMQQueue(QUEUE_NAME);
     }
 
-    @Bean("topic1")
+    @Bean
     public Topic topic(){
         return new ActiveMQTopic(TOPIC_NAME);
     }
