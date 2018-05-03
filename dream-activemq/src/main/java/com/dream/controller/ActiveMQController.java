@@ -24,7 +24,7 @@ public class ActiveMQController {
 
     @GetMapping("/log/{name}")
     public Result activeMQTest001(@PathVariable("name") String name) {
-        for(int i=0; i<100; i++){
+        for(int i=0; i<1; i++){
             mqProducer.sendMessage(queue, "My Name is " + name + " !!!  " + i);
             mqProducer.sendMessage(topic, "My Name is " + name + " !!!  " + i);
         }

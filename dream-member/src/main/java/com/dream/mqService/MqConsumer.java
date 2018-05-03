@@ -1,4 +1,4 @@
-package com.dream.service;
+package com.dream.mqService;
 
 import com.dream.config.MqConfig;
 import org.slf4j.Logger;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import javax.jms.JMSConsumer;
 
-//@Component
+@Component
 public class MqConsumer {
     private final static Logger logger = LoggerFactory.getLogger(JMSConsumer.class);
 
