@@ -1,5 +1,7 @@
 package com.dream.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.dream.dao.user.UserDAO;
 import com.dream.service.MqProducer;
 import com.dream.vo.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,10 @@ public class ActiveMQController {
     @GetMapping("/log/{name}")
     public Result activeMQTest001(@PathVariable("name") String name) {
         for(int i=0; i<1; i++){
-            mqProducer.sendMessage(queue, "My Name is " + name + " !!!  " + i);
+//            mqProducer.sendMessage(queue, "My Name is " + name + " !!!  " + i);
+            UserDAO user = new UserDAO();
+            user.setUsername("liuxinjie");
+            mqProducer.sendMessage(queue, JSONObject.toJSONString(user));
             mqProducer.sendMessage(topic, "My Name is " + name + " !!!  " + i);
         }
         System.out.println(" ------------------------- end --------------------------- ");

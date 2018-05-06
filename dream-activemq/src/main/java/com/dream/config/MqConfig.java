@@ -38,6 +38,7 @@ public class MqConfig {
         bean.setConnectionFactory(activeMQConnectionFactory);
         return bean;
     }
+
     /**
      * queue模式的ListenerContainer
      */
