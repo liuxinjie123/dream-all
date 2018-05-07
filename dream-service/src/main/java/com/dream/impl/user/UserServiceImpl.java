@@ -104,6 +104,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void logout(String token) {
         jedisClient.del(REDIS_USER_SESSION_KEY + ":" + token);
+        session.logout();
     }
 
     public Result queryUserByToken(String token) {

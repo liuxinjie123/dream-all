@@ -75,6 +75,7 @@ public class UserLoginController {
             String clientInfoMsg = ip + userAgent + acceptLanguage;
             System.out.println(" clientInfoMsg = " + clientInfoMsg);
             jedisClient.set(REDIS_USER_SESSION_INFO_KEY + ":" + token, SecureUtil.securePassword(clientInfoMsg));
+            jedisClient.expire(REDIS_USER_SESSION_INFO_KEY + ":" + token, SSO_SESSION_EXPIRE);
             // 添加写 cookie 的逻辑，cookie 的有效期是关闭浏览器就失效。
             CookieUtils.setCookie(request, response, USER_TOKEN_NAME, token);
             Map<String, String> map = new HashMap<>();
