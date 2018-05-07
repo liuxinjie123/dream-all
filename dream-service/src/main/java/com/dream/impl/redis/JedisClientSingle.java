@@ -1,6 +1,7 @@
 package com.dream.impl.redis;
 
 import com.dream.api.redis.JedisClient;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
@@ -69,5 +70,12 @@ public class JedisClientSingle implements JedisClient {
 		jedis.close();
 		return result;
 	}
+
+	@Override
+	public boolean lock(String key, int second) {
+		return true;
+	}
+
+
 
 }

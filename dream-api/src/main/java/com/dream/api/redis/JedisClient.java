@@ -8,4 +8,5 @@ public interface JedisClient {
 	long del(String key);
 	long hdel(String hkey, String key);
 	long expire(String key, int second);
+	boolean lock(String key, int second);
 }
