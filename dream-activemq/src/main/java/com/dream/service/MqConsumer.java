@@ -1,9 +1,12 @@
 package com.dream.service;
 
 import com.dream.config.MqConfig;
+import com.dream.vo.Constants;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.omg.CORBA.PUBLIC_MEMBER;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
@@ -45,5 +48,10 @@ public class MqConsumer {
     @JmsListener(destination = "hello_activemq", containerFactory = "jmsListenerContainerQueue")
     public void onQueueMessage3(Object obj) {
         logger.info("接收到 queue 消息：333333{}", obj);
+    }
+
+    @JmsListener(destination = Constants.SECOND_KILL_PRODUCT01_QUEUE_NAME, containerFactory = "jmsListenerContainerQueue")
+    public void secondKillProduct01Message(Object object) {
+        logger.info(" second kill product01, msg=" + object);
     }
 }

@@ -19,9 +19,11 @@ public class Constants {
 
     public static final String LOGIN_ERROR = "登录失败";
     public static final String SYSTEM_ERROR = "系统异常";
-
+    public static final String SECOND_KILL_FAILURE = "秒杀失败";
+    public static final String SECOND_KILL_SUCCESS = "秒杀成功";
 
     public static final String USER_STATUS_01 = "01";
 
     public static final String DUBBO_VERSION = "1.0.0";
+    public static final String SECOND_KILL_PRODUCT01_QUEUE_NAME = "second-kill-product1-queue-name";
 }
