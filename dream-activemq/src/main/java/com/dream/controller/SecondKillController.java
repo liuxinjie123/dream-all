@@ -11,20 +11,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.jms.Queue;
 import java.time.LocalDateTime;
+import java.util.concurrent.ExecutorService;
 
 @RequestMapping("/second-kill")
 @RestController
 public class SecondKillController {
     @Autowired
-    MqProducer mqProducer;
+    private MqProducer mqProducer;
+    @Autowired
+    private ExecutorService executorService;
+
     private volatile int count = 0;
 
     @PostMapping("/order")
     public Result createOrder() {
-        if (count <= 10) {
-            count++;
+        if (count <= 30) {
             Queue queue = new ActiveMQQueue(Constants.SECOND_KILL_PRODUCT01_QUEUE_NAME);
-            mqProducer.sendMessage(queue, "second kill product01, now=" + LocalDateTime.now());
+            synchronized (queue) {
+                executorService.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        mqProducer.sendMessage(queue, "second kill product01, now=" + LocalDateTime.now());
+                    }
+                });
+                System.out.println("count=" + count);
+                count++;
+            }
             return Result.success().setMsg(Constants.SECOND_KILL_SUCCESS);
         } else {
             return Result.error(Constants.SECOND_KILL_FAILURE);
